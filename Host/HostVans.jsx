@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getHostVan } from '../api'
+import { getHostVans } from '../api'
+import { Link } from 'react-router-dom'
 
 
 function HostVans() {
@@ -11,7 +12,7 @@ useEffect(() => {
 async function loadVans() {
   setLoading(true)
   try {
-    const data = await getHostVan()
+    const data = await getHostVans()
     setVans(data)
   } catch(err) {
     console.log(err)
@@ -24,9 +25,15 @@ loadVans()
 }, [])
 
 let vansEl = vans.map(van => (
-  <div>
-    {van.name}
-  </div>
+  <Link key={van.id} to={van.id}>
+    <div className='host-vans-wrapper'>
+      <img src={van.imageUrl} />
+      <div>
+        <h1>{van.name}</h1>
+        <p>${van.price}/day</p>
+      </div>
+    </div>
+  </Link>
 ))
 
 
@@ -35,7 +42,12 @@ if (loading) {
 }
 
   return (
-    <div>{vansEl}</div>
+    <div className='host-vans-main-container'>
+      <h1>Your listed vans</h1>
+      
+        {vansEl}
+   
+    </div>
   )
 }
 
