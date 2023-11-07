@@ -1,13 +1,15 @@
 {
   "name": "project",
   "dependencies": {
+    "firebase": "^10.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.4.3"
+    "react-router-dom": "6.4.3",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
-    "vite": "latest",
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "vite": "latest"
   },
   "scripts": {
     "start": "vite",
