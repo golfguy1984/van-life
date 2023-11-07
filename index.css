@@ -40,14 +40,14 @@ header .site-logo {
     font-size: 25px;
 }
 
-header a {
+header a, .host-page-nav a {
     text-decoration: none;
     color: #4D4D4D;
     font-weight: 600;
     padding: 5px 20px;
 }
 
-header a:hover {
+header a:hover, .host-page-nav a:hover {
     color: #161616;
     text-decoration: underline;
 }
@@ -297,3 +297,10 @@ footer {
     border: none;
     background: none;
 }
+
+/* HOST PAGE */
+
+.host-page-nav {
+    display: flex;
+}
+
