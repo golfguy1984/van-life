@@ -39,11 +39,11 @@ setFormData(prev => ({
 } 
 
   return (
-    <div>
+    <div className='login-container'>
         {location.state?.message && <h3>{location.state.message}</h3>}
         <h1>Sign into your account</h1>
         {error?.message && <h3>{error.message}</h3>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='login-form'>
             <input 
                 name="email"
                 type="email" 
@@ -57,6 +57,7 @@ setFormData(prev => ({
                 onChange={handleChange}   
             />
             <button 
+                className='link-button'
                 disabled={status === "submitting"}
             >
                 {status === "submitting" ? "Logging in..." : "Log in"}

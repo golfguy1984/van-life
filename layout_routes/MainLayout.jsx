@@ -9,7 +9,7 @@ function MainLayout() {
     <div className='main-site-wrapper'>
         <header>
             <Link className="site-logo" to="/">#VanLife</Link>
-            <nav>
+            <nav className='main-nav'>
               <Link to="/host">Host</Link>
               <Link to="/about">About</Link>
               <Link to="/vans">Vans</Link>
