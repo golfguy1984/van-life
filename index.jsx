@@ -15,7 +15,10 @@ import HostVansInfo from './Host/HostVansInfo'
 import HostVansPricing from './Host/HostVansPricing';
 import HostVansPhotos from './Host/HostVansPhotos';
 import MainLayout from './layout_routes/MainLayout';
+import Login from './pages/Login';
+import AuthRequired from './layout_routes/AuthRequired';
 
+import "./server"
 
 function App() {
   return (
@@ -26,7 +29,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/vans" element={<Vans />} />
           <Route path="vans/:id" element={<VansDetail />} />
+          <Route path="login" element={<Login />} />
           
+        <Route element={<AuthRequired />}>
           <Route path="/host" element={<Host />}>
             <Route index element={<HostDashboard />} />
             <Route path="income" element={<HostIncome />} /> 
@@ -38,6 +43,7 @@ function App() {
               <Route path="photos" element={<HostVansPhotos />} />
             </Route>
           </Route>
+        </Route>  
 
         </Route>  
       </Routes>
