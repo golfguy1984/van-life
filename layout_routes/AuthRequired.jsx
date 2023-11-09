@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../api'
 
 function AuthRequired() {
+  const [user, setUser] = useState({})
 
-  const isLoggedIn = localStorage.getItem("loggedin")
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
 
-if (!isLoggedIn) {
+  // const isLoggedIn = localStorage.getItem("loggedin")
+
+if (!user) {
     return (
         <Navigate 
           to="login" 
@@ -15,7 +22,7 @@ if (!isLoggedIn) {
 }
 
   return (
-    isLoggedIn && <Outlet />
+    user && <Outlet />
   )
 }
 

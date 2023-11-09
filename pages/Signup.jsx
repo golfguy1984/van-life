@@ -1,47 +1,45 @@
 import React, { useState } from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
-import { loginUser, logOut } from '../api'
-//import login above
+import { Link, useNavigate } from 'react-router-dom'
+import { register } from '../api'
 
-function Login() {
-    
-const [formData, setFormData] = useState({email: '', password: ''})
-const [status, setStatus] = useState("idle")
-const [error, setError] = useState(null)
 
-const location = useLocation()
+function Signup() {
+const [status, setStatus] = useState('idle')
+const [formData, setFormData] = useState({email: '', password: ""}) 
+const [error, setError] = useState(null)   
+
 const navigate = useNavigate()
-
+//this should navigate the user to the host page with all of their information or prompts to set up their account by adding new vans
 
 function handleSubmit(e) {
     e.preventDefault()
-    setStatus('submitting')
-    loginUser(formData)
+    setStatus("submitting")
+    register(formData)
         .then(data => {
             setError(null)
-            navigate('/host', {replace: true})
+            navigate('/', {replace: true})
         }).catch(err => {
             setError(err)
-        })
-        .finally(() => {
+        }).finally(() => {
             setStatus('idle')
         })
-
 }
 
 
+
 function handleChange(e) {
-const { name, value } = e.target
-setFormData(prev => ({
-    ...prev,
-    [name]: value
-}))
-} 
+    const { name, value } = e.target
+    setFormData(prev => ({
+        ...prev,
+        [name]: value
+    }))
+    }    
+
 
   return (
     <div className='login-container'>
-        {location.state?.message && <h3>{location.state.message}</h3>}
-        <h1>Sign into your account</h1>
+        {/* {location.state?.message && <h3>{location.state.message}</h3>} */}
+        <h1>Create an account</h1>
         {error?.message && <h3>{error.message}</h3>}
         <form onSubmit={handleSubmit} className='login-form'>
             <input 
@@ -63,10 +61,10 @@ setFormData(prev => ({
                 {status === "submitting" ? "Logging in..." : "Log in"}
             </button>
         </form>
-        <h4>Don't have an account? <Link to="/signup">Create one now</Link></h4>
-        <button onClick={logOut}>Logout</button>
+        <h4>Already have an account? <Link to="/login">Log in now</Link></h4>
+        
     </div>
   )
 }
 
-export default Login
+export default Signup

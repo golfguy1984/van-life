@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { getHostVans } from '../api'
-import { Link } from 'react-router-dom'
+import { getLoggedInVans } from '../api'
+import { Link, useOutletContext } from 'react-router-dom'
+
 
 
 function HostVans() {
 const [vans, setVans] = useState([])
 const [loading, setLoading] = useState(false)
 
-//make api call to the server to get back only the vans of the logged in user
+const [user, setUser] = useOutletContext()
+
+
+
 useEffect(() => {
 async function loadVans() {
   setLoading(true)
   try {
-    const data = await getHostVans()
+    const data = await getLoggedInVans(user)
     setVans(data)
   } catch(err) {
     console.log(err)
