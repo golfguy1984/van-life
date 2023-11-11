@@ -1,22 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../api'
+import { getLoggedInVans } from '../api'
 
 function Host() {
 
-const [user, setUser] = useState({})
+  
+  const [vans, setVans] = useState([])
+  const [loading, setLoading] = useState(false)
 
-onAuthStateChanged(auth, (currentUser) => {
-  setUser(currentUser)
-})
+  
 
 
 
-//pass user info through context? or pass context through the outlet
 
-//useEffect that grabs loggedin users info and stores it in state?
-//have access to userid above and can querey their collection of vans
+useEffect(() => {
+  async function loadVans() {
+    setLoading(true)
+    try {
+      const data = await getLoggedInVans()
+      setVans(data)
+    } catch(err) {
+      console.log(err)
+    } finally {
+    setLoading(false)  
+    }
+  }
+  loadVans()
+  
+}, [])
+
+
+if (loading) {
+  return <h1>loading...</h1>
+}
 
 
 
@@ -28,8 +44,7 @@ onAuthStateChanged(auth, (currentUser) => {
             <Link to="vans">Vans</Link>
             <Link to="reviews">Reviews</Link>
         </nav>
-        <Outlet context={[user, setUser]}/>
-        <p>{user?.email}</p>
+        <Outlet context={vans}/>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getLoggedInVans } from '../api'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
@@ -8,15 +8,12 @@ function HostVans() {
 const [vans, setVans] = useState([])
 const [loading, setLoading] = useState(false)
 
-const [user, setUser] = useOutletContext()
-
-
 
 useEffect(() => {
 async function loadVans() {
   setLoading(true)
   try {
-    const data = await getLoggedInVans(user)
+    const data = await getLoggedInVans()
     setVans(data)
   } catch(err) {
     console.log(err)

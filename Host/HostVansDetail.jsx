@@ -8,6 +8,7 @@ function HostVansDetail() {
   const [loading, setLoading] = useState(false)
 
   const { id } = useParams()
+
   //make another call to the db to get the info for the specific van
 
 useEffect(() => {

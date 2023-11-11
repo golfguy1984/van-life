@@ -27,6 +27,25 @@ export const auth = getAuth(app)
 const vansCollectionRef = collection(db, "vans")
 // const userVansCollectionRef = collection(db, "user", auth.currentUser.uid, "vans")
 
+// const userId = auth.currentUser
+let uid
+
+const getUserId = () => {
+    return new Promise((resolve) => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                uid = user.uid;
+                // ...
+            } else {
+                uid = null;
+            }
+            resolve()
+
+    })
+}
+)};
+
+
 
 
 export async function getVans() {
@@ -38,8 +57,9 @@ export async function getVans() {
     return vans
 }
 
-export async function getLoggedInVans(userId) {
-    const snapshot = await getDocs(collection(db, "user", userId.uid, "vans"))
+export async function getLoggedInVans() {
+    await getUserId()
+    const snapshot = await getDocs(collection(db, "user", uid, "vans"))
     const vans = snapshot.docs.map(doc => ({
         ...doc.data(),
         id: doc.id

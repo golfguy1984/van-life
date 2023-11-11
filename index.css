@@ -44,7 +44,8 @@ header .site-logo {
 
 header a, 
 .host-page-nav a,
-.host-details-nav a {
+.host-details-nav a,
+.host-vans-main-container a {
     text-decoration: none;
     color: #4D4D4D;
     font-weight: 600;
@@ -53,7 +54,8 @@ header a,
 
 header a:hover,
 .host-page-nav a:hover,
-.host-details-nav a:hover {
+.host-details-nav a:hover,
+.host-vans-main-container a:hover {
     color: #161616;
     text-decoration: underline;
 }
@@ -315,6 +317,8 @@ footer {
 
 .host-page-nav {
     display: flex;
+    margin-left: 25px;
+    gap: 20px;
 }
 
 .host-vans-wrapper {
@@ -378,6 +382,18 @@ footer {
 
 .detail-btn {
     padding-left: initial !important;
+}
+
+.host-dash-top {
+    margin-top: 2.25rem;
+    background-color: #FFEAD0;
+    display: flex;
+    justify-content: center;
+    gap: 11rem;
+}
+
+.host-dash-mid {
+    background-color: #FFDDB2;
 }
 
 .login-container {
