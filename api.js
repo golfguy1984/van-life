@@ -6,6 +6,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
+    setPersistence,
+    browserSessionPersistence
   } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 
@@ -23,6 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 export const auth = getAuth(app)
+setPersistence(auth, browserSessionPersistence)
 
 const vansCollectionRef = collection(db, "vans")
 // const userVansCollectionRef = collection(db, "user", auth.currentUser.uid, "vans")

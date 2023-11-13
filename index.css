@@ -388,12 +388,50 @@ footer {
     margin-top: 2.25rem;
     background-color: #FFEAD0;
     display: flex;
-    justify-content: center;
-    gap: 11rem;
+    padding: 0 2rem;
+}
+
+.dash-top-left {
+    margin-right: auto;
+}
+
+.dash-top-right {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .host-dash-mid {
     background-color: #FFDDB2;
+    display: flex;
+    padding: 0 2rem;
+    font-weight: bold;
+}
+
+.host-dash-mid span {
+    margin-left: 10px;
+    font-weight: 300;
+}
+
+.host-dash-bottom {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.fa-star {
+    padding-top: 1px;
+}
+
+.details {
+    font-weight: initial;
+}
+
+.host-dash-bottom h3 {
+    margin-right: auto;
+}
+
+.review-score {
+    margin-right: auto;
 }
 
 .login-container {

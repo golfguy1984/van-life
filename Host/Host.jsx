@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
 import { getLoggedInVans } from '../api'
 
 function Host() {
 
   
-  const [vans, setVans] = useState([])
-  const [loading, setLoading] = useState(false)
+const [vans, setVans] = useState([])
+const [loading, setLoading] = useState(false)
 
   
-
+const activeStyle =  {
+  textDecoration: "underline",
+  color:  "#161616",
+  fontWeight: "700"
+}
 
 
 
@@ -39,10 +43,28 @@ if (loading) {
   return (
     <>
         <nav className='host-page-nav'>
-            <Link to=".">Dashboard</Link>
-            <Link to="income">Income</Link>
-            <Link to="vans">Vans</Link>
-            <Link to="reviews">Reviews</Link>
+            <NavLink 
+              to="."
+              end
+              style={({isActive}) => isActive ? activeStyle : null}
+            >
+                Dashboard
+            </NavLink>
+            <NavLink 
+              to="income"
+              style={({isActive}) => isActive ? activeStyle : null}
+            >Income
+            </NavLink>
+            <NavLink 
+              to="vans"
+              style={({isActive}) => isActive ? activeStyle : null}
+            >Vans
+            </NavLink>
+            <NavLink 
+              to="reviews"
+              style={({isActive}) => isActive ? activeStyle : null}
+            >Reviews
+            </NavLink>
         </nav>
         <Outlet context={vans}/>
     </>

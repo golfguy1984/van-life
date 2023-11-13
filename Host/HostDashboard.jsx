@@ -1,5 +1,7 @@
 import React from 'react'
 import { useOutletContext, Link } from 'react-router-dom'
+import { FaStar } from "react-icons/fa6";
+
 
 function HostDashboard() {
 
@@ -21,22 +23,24 @@ const vanEl = vans.map(van => (
   return (
     <>
       <div className='host-dash-top'>
-        <div>
+        <div className='dash-top-left'>
           <h2>Welcome!</h2>
           <p>Income last 30 days</p>
           <h1>$2,260</h1>
         </div>
-        <div>
+        <div className='dash-top-right'>
           <p>details</p>
         </div>
       </div>
       <div className='host-dash-mid'>
-        <p>Review Scoer<span>star icon</span><span>5/5</span></p>
-        <p>details</p>
+        <p className='review-score'>Review Score<span><FaStar className='fa-star'/></span><span>5/5</span></p>
+        <p className='details'>details</p>
       </div>
-      <div className='host-vans-main-container'>
+      <div className='host-dash-bottom'>
         <h3>Your listed vans</h3>
         <Link to="vans">View all</Link>
+      </div>
+      <div className='host-vans-main-container'>
         {vanEl}
       </div>
     </>
