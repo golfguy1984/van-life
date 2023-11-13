@@ -1,6 +1,7 @@
 import React from 'react'
 import { useOutletContext, Link } from 'react-router-dom'
 import { FaStar } from "react-icons/fa6";
+import { logOut } from '../api';
 
 
 function HostDashboard() {
@@ -43,6 +44,7 @@ const vanEl = vans.map(van => (
       <div className='host-vans-main-container'>
         {vanEl}
       </div>
+       {/* <button onClick={logOut}>Log Out</button> */}
     </>
   )
 }

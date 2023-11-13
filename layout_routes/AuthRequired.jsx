@@ -10,7 +10,6 @@ function AuthRequired() {
     setUser(currentUser)
   })
 
-  // const isLoggedIn = localStorage.getItem("loggedin")
 
 if (!user) {
     return (

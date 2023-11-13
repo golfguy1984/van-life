@@ -2,8 +2,6 @@ import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 
 
-
-
 function HostVans() {
 
 const vans = useOutletContext()
