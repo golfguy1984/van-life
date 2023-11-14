@@ -10,10 +10,10 @@ function AuthRequired() {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
   })
-  console.log('im running')
-  }, [])
+}, [])
 
 
+console.log(user)
 
 
 if (!user) {
