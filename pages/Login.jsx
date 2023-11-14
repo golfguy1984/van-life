@@ -19,6 +19,7 @@ function handleSubmit(e) {
     loginUser(formData)
         .then(data => {
             setError(null)
+            localStorage.setItem("loggedIn", "true")
             navigate('/host', {replace: true})
         }).catch(err => {
             setError(err)
@@ -64,7 +65,6 @@ setFormData(prev => ({
             </button>
         </form>
         <h4>Don't have an account? <Link to="/signup">Create one now</Link></h4>
-        {/* <button onClick={logOut}>Logout</button> */}
     </div>
   )
 }

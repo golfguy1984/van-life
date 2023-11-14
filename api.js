@@ -26,11 +26,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 export const auth = getAuth(app)
 setPersistence(auth, browserSessionPersistence)
-
 const vansCollectionRef = collection(db, "vans")
-// const userVansCollectionRef = collection(db, "user", auth.currentUser.uid, "vans")
 
-// const userId = auth.currentUser
+
 let uid
 
 const getUserId = () => {
@@ -126,7 +124,7 @@ export async function loginUser(creds) {
         console.log(user)
     } catch (error) {
         console.log(error.message)
-    }
+    } 
 }
 
 
@@ -151,6 +149,7 @@ export async function register(data) {
 
 export async function logOut() {
     await signOut(auth)
+    localStorage.clear()
     console.log('logged out')
 }
 
