@@ -151,5 +151,6 @@ export async function register(data) {
 
 export async function logOut() {
     await signOut(auth)
+    console.log('logged out')
 }
 

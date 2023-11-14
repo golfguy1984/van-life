@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../api'
 
 function AuthRequired() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(auth.currentUser)
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
   })
+  console.log('im running')
+  }, [])
+
+
 
 
 if (!user) {

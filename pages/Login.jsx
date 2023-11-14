@@ -64,7 +64,7 @@ setFormData(prev => ({
             </button>
         </form>
         <h4>Don't have an account? <Link to="/signup">Create one now</Link></h4>
-        <button onClick={logOut}>Logout</button>
+        {/* <button onClick={logOut}>Logout</button> */}
     </div>
   )
 }

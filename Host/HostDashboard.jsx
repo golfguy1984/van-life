@@ -44,7 +44,7 @@ const vanEl = vans.map(van => (
       <div className='host-vans-main-container'>
         {vanEl}
       </div>
-       {/* <button onClick={logOut}>Log Out</button> */}
+       <button onClick={logOut}>Log Out</button>
     </>
   )
 }
