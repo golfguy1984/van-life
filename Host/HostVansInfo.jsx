@@ -5,11 +5,11 @@ function HostVansInfo() {
 const { currentVan } = useOutletContext()
 
   return (
-    <div>
-      <p>Name: {currentVan.name}</p>
-      <p>Catagory: {currentVan.type}</p>
-      <p>Description: {currentVan.description}</p>
-      <p>Visibility: Public</p>
+    <div className='host-vans-info-container'>
+      <p><span>Name:</span> {currentVan.name}</p>
+      <p><span>Catagory:</span> {currentVan.type}</p>
+      <p><span>Description:</span> {currentVan.description}</p>
+      <p><span>Visibility:</span> Public</p>
     </div>
   )
 }

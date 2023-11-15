@@ -32,7 +32,7 @@ if (loading) {
 
   return (
     <>
-    <NavLink to=".." relative='path' className="back-button">&larr; back to all vans</NavLink>
+    <NavLink to=".." relative='path' className="back-button back-button-details">&larr; back to all vans</NavLink>
     <div className='host-van-detail-container'>
       {currentVan && 
         <>
@@ -41,7 +41,7 @@ if (loading) {
           <div className='host-van-detail-right'>
             <div className={`van-type ${currentVan.type} selected host-van-detail-badge`}>{currentVan.type}</div>
             <h3>{currentVan.name}</h3>
-            <p>${currentVan.price}/day</p>
+            <p><span>${currentVan.price}</span>/day</p>
           </div>
         </div>
         <nav className='host-details-nav'>

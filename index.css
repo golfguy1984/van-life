@@ -297,6 +297,11 @@ footer {
     margin-left: 26px;
 }
 
+.back-button-details {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
 .filter-options {
     display: flex;
     gap: 10px;
@@ -366,6 +371,16 @@ footer {
 .host-van-detail-right {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.host-van-detail-right p, h3 {
+    margin: 0;
+}
+
+.host-van-detail-right span {
+    font-weight: bold;
 }
 
 .host-van-detail-top img {
@@ -377,7 +392,13 @@ footer {
 }
 
 .host-details-nav {
-    margin-top: 10px;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.host-vans-info-container span {
+    font-weight: bold;
 }
 
 .detail-btn {
