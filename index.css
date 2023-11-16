@@ -455,6 +455,13 @@ footer {
     margin-right: auto;
 }
 
+.host-income-top {
+    margin: 1.625rem;
+}
+
+
+/* LOGIN */
+
 .login-container {
     padding: 0 30px;
     display: flex;
