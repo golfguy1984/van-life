@@ -68,6 +68,16 @@ export async function getLoggedInVans() {
     return vans
 }
 
+export async function getHostIncome() {
+    await getUserId()
+    const snapshot = await getDocs(collection(db, "user", uid, "income"))
+    const income = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+    }))
+    return income
+}
+
 export async function getVan(id) {
     const docRef = doc(db, "vans", id)
     const snapshot = await getDoc(docRef)
