@@ -4,7 +4,7 @@ import { Link, useOutletContext } from 'react-router-dom'
 
 function HostVans() {
 
-const vans = useOutletContext()
+const {vans} = useOutletContext()
 
 
 let vansEl = vans.map(van => (

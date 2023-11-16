@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   BarChart,
   Bar,
@@ -9,35 +9,65 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+import { useOutletContext } from 'react-router-dom';
 
 const data = [
   {
-    name: "Ju",
+    name: "January",
     pv: 4000
   },
   {
-    name: "Au",
+    name: "February",
     pv: 3500
   },
   {
-    name: "Se",
+    name: "March",
     pv: 2500
   },
   {
-    name: "Oc",
+    name: "April",
     pv: 3000
   },
   {
-    name: "No",
+    name: "May",
     pv: 1500
   },
   {
-    name: "De",
+    name: "June",
     pv: 2000
   }
 ];
 
 function HostIncome() {
+const [incomeData, setIncomeData] = useState(data)
+
+const {income} = useOutletContext()
+// take income data and manipulate it to give you 
+//  { name: id, total: sum}
+
+
+useEffect(() => {
+  const updatedData = incomeData.map(initialItem => {
+    const matchingNewItem = income.find(newItem => newItem.id === initialItem.name);
+  
+    if (matchingNewItem) {
+      const updatedPv = Object.values(matchingNewItem).reduce((sum, value) => {
+        if (typeof value === 'number') {
+          return sum + value;
+        }
+        return sum;
+      }, 0);
+  
+      return { ...initialItem, pv: updatedPv };
+    }
+  
+    return initialItem;
+  });
+  
+  setIncomeData(updatedData)
+
+}, [income])
+
 
   function formatYAxis(value) {
     if (value === 0) return "$0";
@@ -46,6 +76,16 @@ function HostIncome() {
     if (value === 3000) return "$3k";
     if (value === 4000) return "$4k";
     if (value === 5000) return "$5k";
+    return value;
+  }
+
+  function formatXAxis(value) {
+    if (value === "January") return "Ja";
+    if (value === "February") return "Fe";
+    if (value === "March") return "Ma";
+    if (value === "April") return "Ap";
+    if (value === "May") return "May";
+    if (value === "June") return "Ju";
     return value;
   }
 
@@ -61,7 +101,7 @@ function HostIncome() {
           <BarChart
             // width={500}
             // height={300}
-            data={data}
+            data={incomeData}
             margin={{
               top: 0,
               right: 0,
@@ -80,6 +120,7 @@ function HostIncome() {
                 fontFamily: "sans-serif"
               }}
               tick={{ fill: "lightgrey" }}
+              tickFormatter={formatXAxis}
               axisLine={false}
               tickLine={false}
             />

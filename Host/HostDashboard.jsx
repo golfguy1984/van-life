@@ -6,7 +6,7 @@ import { logOut } from '../api';
 
 function HostDashboard() {
 
-const vans = useOutletContext()
+const {vans} = useOutletContext()
 
 
 const vanEl = vans.map(van => (

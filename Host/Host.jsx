@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
-import { getLoggedInVans } from '../api'
+import { getHostIncome, getLoggedInVans } from '../api'
 
 function Host() {
 
   
 const [vans, setVans] = useState([])
 const [loading, setLoading] = useState(false)
+const [income, setIncome] = useState([])
 
   
 const activeStyle =  {
@@ -22,13 +23,16 @@ useEffect(() => {
     setLoading(true)
     try {
       const data = await getLoggedInVans()
+      const income = await getHostIncome()
       setVans(data)
+      setIncome(income)
     } catch(err) {
       console.log(err)
     } finally {
     setLoading(false)  
     }
   }
+
   loadVans()
   
 }, [])
@@ -66,7 +70,7 @@ if (loading) {
             >Reviews
             </NavLink>
         </nav>
-        <Outlet context={vans}/>
+        <Outlet context={{vans, income}}/>
     </>
   )
 }
