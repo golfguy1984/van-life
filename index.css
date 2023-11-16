@@ -463,6 +463,21 @@ footer {
     margin: 0 1.625rem;
 }
 
+.transactions-header {
+    display: flex;
+    align-items: center;
+    margin: 1rem 1.625rem;
+}
+
+.transactions-header p {
+    margin-left: auto;
+    color: #4D4D4D;
+}
+
+.transactions p {
+    margin-left: auto;
+}
+
 
 /* LOGIN */
 

@@ -39,11 +39,13 @@ const data = [
 ];
 
 function HostIncome() {
-const [incomeData, setIncomeData] = useState(data)
-
 const {income} = useOutletContext()
-// take income data and manipulate it to give you 
-//  { name: id, total: sum}
+
+
+const [incomeData, setIncomeData] = useState(data)
+const [transactions, setTransactions] = useState(Object.values(income[0]).filter(value => typeof value === 'number'))
+
+
 
 
 useEffect(() => {
@@ -88,6 +90,15 @@ useEffect(() => {
     if (value === "June") return "Ju";
     return value;
   }
+
+  const transactionsEL = transactions.map(item => (
+    <div className='host-vans-wrapper'>
+      <h2>${item}</h2>
+      <p>1/12/23</p>
+    </div>
+  ))
+
+  console.log(transactions)
 
   return (
     <>
@@ -137,11 +148,13 @@ useEffect(() => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div>
-        <h3>Your Transactions(3)</h3>
+      <div className='transactions-header'>
+        <h3>Your Transactions (3)</h3>
         <p>Last 30 days</p>
       </div>
-      <>List goes here</>
+      <div className='host-vans-main-container transactions'>
+        {transactionsEL}
+      </div>
     </>
   )
 }
