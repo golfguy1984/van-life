@@ -15,6 +15,7 @@ import HostVansInfo from './Host/HostVansInfo'
 import HostVansPricing from './Host/HostVansPricing';
 import HostVansPhotos from './Host/HostVansPhotos';
 import MainLayout from './layout_routes/MainLayout';
+import HostVansAdd from './Host/HostVansAdd';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AuthRequired from './layout_routes/AuthRequired';
@@ -39,6 +40,7 @@ function App() {
             <Route path="income" element={<HostIncome />} /> 
             <Route path="reviews" element={<HostReviews />} /> 
             <Route path="vans" element={<HostVans />} />
+            <Route path="vans/add" element={<HostVansAdd />} />
             <Route path="vans/:id" element={<HostVansDetail />}>
               <Route index element={<HostVansInfo />} />
               <Route path="pricing" element={<HostVansPricing />} />

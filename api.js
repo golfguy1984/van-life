@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc, query, where, setDoc } from "firebase/firestore/lite"
+import { getFirestore, collection, getDocs, getDoc, doc, query, where, setDoc, addDoc } from "firebase/firestore/lite"
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -86,6 +86,17 @@ export async function getVan(id) {
         id: snapshot.id
     }      
 }
+
+export async function addVan(data) {
+    try {
+      const collectionPath = `user/${uid}/vans`
+      const ref = await addDoc(collection(db, collectionPath), {...data, id:uid});
+      const refTwo = await addDoc(collection(db, 'vans'), {...data, id:uid});
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
 // export async function getHostVans() {
 //     const q = query(vansCollectionRef, where("hostId", "==", "123"))

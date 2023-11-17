@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
+import { CiCirclePlus } from "react-icons/ci";
 
 
 function HostVans() {
@@ -22,7 +23,12 @@ let vansEl = vans.map(van => (
 
   return (
     <div className='host-vans-main-container'>
-      <h1>Your listed vans</h1>
+      <div className='host-vans-top'>
+        <h1>Your listed vans</h1>
+        <Link to="./add">
+          <p><span><CiCirclePlus /></span>Add van</p>
+        </Link>
+      </div>
       
         {vansEl}
    
