@@ -1,29 +1,36 @@
 import React, { useEffect, useState} from 'react'
-import { Outlet, useParams, NavLink } from 'react-router-dom'
+import { Outlet, useParams, NavLink, useOutletContext } from 'react-router-dom'
 import { getHostVan } from '../api'
 import { PacmanLoader } from 'react-spinners'
 
 function HostVansDetail() {
   const [currentVan, setCurrentVan] = useState(null)
   const [loading, setLoading] = useState(false)
+  // const [selectedVan, setSelectedVan] = ({})
 
   const { id } = useParams()
+  const { vans } = useOutletContext()
 
-  //make another call to the db to get the info for the specific van
+//logged in vans already exist - pass vans as context down here and then match the id in use params with the van that was clicked and display it
 
 useEffect(() => {
-  async function loadVan() {
-  setLoading(true)
-  try {
-    const data = await getHostVan(id)
-    setCurrentVan(data)
-  } catch(err) {
-    console.log(err)
-  } finally {
-    setTimeout(() => {setLoading(false)}, 1500)
-  }}
-  loadVan()
+  let filteredVan = vans.filter(van => van.id === id)
+  setCurrentVan(filteredVan[0])
 }, [id])
+
+// useEffect(() => {
+//   async function loadVan() {
+//   setLoading(true)
+//   try {
+//     const data = await getHostVan(id)
+//     setCurrentVan(data)
+//   } catch(err) {
+//     console.log(err)
+//   } finally {
+//     setTimeout(() => {setLoading(false)}, 1500)
+//   }}
+//   loadVan()
+// }, [id])
 
 
 if (loading) {

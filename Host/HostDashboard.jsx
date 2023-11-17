@@ -10,7 +10,7 @@ const {vans} = useOutletContext()
 
 
 const vanEl = vans.map(van => (
-    <Link key={van.id} to={`/vans/${van.id}`}>
+    <Link key={van.id} to={`/host/vans/${van.id}`}>
       <div className='host-vans-wrapper'>
         <img src={van.imageUrl} />
         <div>
