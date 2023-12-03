@@ -16,10 +16,10 @@ let context = useOutletContext()
 
 console.log(context)
 
-if (!context) {
+if (!context.user) {
     return (
         <Navigate 
-          to="/" 
+          to="login" 
           state={{message: "You must log in first"}}
           replace
     />)

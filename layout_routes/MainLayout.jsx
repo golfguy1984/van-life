@@ -18,18 +18,18 @@ useEffect(() => {
 })
 }, [])
 
-useEffect(() => {
-  async function loadvans() {
-    try {
-      const data = await getAllVans()
-      setVans(data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+// useEffect(() => {
+//   async function loadvans() {
+//     try {
+//       const data = await getAllVans()
+//       setVans(data)
+//     } catch (err) {
+//       console.log(err)
+//     }
+//   }
   
-  loadvans()
-}, [])
+//   loadvans()
+// }, [])
 
 
 
@@ -46,7 +46,7 @@ useEffect(() => {
               <Link to="/login"><RxAvatar/></Link>
             </nav>
         </header>
-        <Outlet context={{user, vans}}/>
+        <Outlet context={{user}}/>
         <footer>
           <p>2023 #VANLIFE</p>
         </footer>
