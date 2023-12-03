@@ -8,14 +8,21 @@ function Vans() {
     const [loading, setLoading] = React.useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
 
-    // const test = useOutletContext().vans
-    // console.log(test)
+    const test = useOutletContext().allVans
+    if (!test) {
+        console.log('loading')
+        //if vans doesn't exist yet setLoading to true
+    } else {
+        //setloading to false and ex
+        console.log('true')
+    }
 
     const typeFilter = searchParams.get('type')
   
     const filteredVans = typeFilter
     ? vans.filter(van => van.type === typeFilter)
     : vans
+
 
     React.useEffect(() => {
         async function loadVans() {

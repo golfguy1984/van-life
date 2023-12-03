@@ -3,14 +3,11 @@ import { Outlet, Link } from 'react-router-dom'
 import { RxAvatar } from "react-icons/rx";
 import { auth, getAllVans } from '../api';
 import { onAuthStateChanged } from 'firebase/auth'
-//import auth
-//impor useState and useEffect
 
-// raise the useEffect and user state to here and then pass as context to authrequired
 
 function MainLayout() {
   const [user, setUser] = useState(localStorage.getItem("loggedIn"))
-  const [vans, setVans] = useState(null)
+  const [allVans, setAllVans] = useState(null)
 
 useEffect(() => {
   onAuthStateChanged(auth, (currentUser) => {
@@ -18,18 +15,18 @@ useEffect(() => {
 })
 }, [])
 
-// useEffect(() => {
-//   async function loadvans() {
-//     try {
-//       const data = await getAllVans()
-//       setVans(data)
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
+useEffect(() => {
+  async function loadvans() {
+    try {
+      const data = await getAllVans()
+      setAllVans(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   
-//   loadvans()
-// }, [])
+  loadvans()
+}, [])
 
 
 
@@ -46,7 +43,7 @@ useEffect(() => {
               <Link to="/login"><RxAvatar/></Link>
             </nav>
         </header>
-        <Outlet context={{user}}/>
+        <Outlet context={{user, allVans}}/>
         <footer>
           <p>2023 #VANLIFE</p>
         </footer>
