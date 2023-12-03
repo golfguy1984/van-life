@@ -48,6 +48,45 @@ const getUserId = () => {
 
 
 
+export async function getAllVans() {
+    try {
+      console.log('Fetching users...');
+      const usersSnapshot = await getDocs(collection(db, 'user'));
+      console.log('Users snapshot:', usersSnapshot.docs.length);
+  
+      let allVans = [];
+  
+      // Use Promise.all to wait for all vansSnapshots to resolve
+      await Promise.all(usersSnapshot.docs.map(async (userDoc) => {
+        const userId = userDoc.id;
+        console.log('Fetching vans for user:', userId);
+  
+        const vansSnapshot = await getDocs(collection(db, 'user', userId, 'vans'));
+        console.log('Vans snapshot:', vansSnapshot.docs.length);
+  
+        const userVans = vansSnapshot.docs.map((vanDoc) => ({
+          ...vanDoc.data(),
+          id: vanDoc.id,
+          userId: userId,
+        }));
+        console.log(`each user's vans`, userVans);
+  
+        allVans = allVans.concat(userVans);
+      }));
+  
+      console.log('All vans:', allVans);
+      return allVans;
+    } catch (error) {
+      console.error('Error getting all vans:', error);
+      throw error;
+    }
+  }
+  
+  
+
+
+
+
 
 export async function getVans() {
     const snapshot = await getDocs(vansCollectionRef)
