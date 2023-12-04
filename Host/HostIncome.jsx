@@ -91,14 +91,14 @@ useEffect(() => {
     return value;
   }
 
-  const transactionsEL = transactions.map(item => (
-    <div className='host-vans-wrapper'>
+  const transactionsEL = transactions.map((item, i) => (
+    <div key={i} className='host-vans-wrapper'>
       <h2>${item}</h2>
       <p>1/12/23</p>
     </div>
   ))
 
-  console.log(transactions)
+
 
   return (
     <>

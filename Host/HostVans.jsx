@@ -6,7 +6,7 @@ import { CiCirclePlus } from "react-icons/ci";
 function HostVans() {
 
 const {vans} = useOutletContext()
-console.log(vans)
+
 
 let vansEl = vans.map(van => (
   <Link key={van.id} to={van.id}>
