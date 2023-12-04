@@ -1,21 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useSearchParams, useOutletContext } from 'react-router-dom'
-import { getVans } from "../api"
 import { PacmanLoader } from 'react-spinners'
 
 function Vans() {
     const [vans, setVans] = React.useState([])
-    const [loading, setLoading] = React.useState(false)
+    // const [loading, setLoading] = React.useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const test = useOutletContext().allVans
-    if (!test) {
-        console.log('loading')
-        //if vans doesn't exist yet setLoading to true
-    } else {
-        //setloading to false and ex
-        console.log('true')
-    }
+const contextVans = useOutletContext().allVans
+
+useEffect(() => {
+if (contextVans) {
+    setVans(contextVans)
+    // setLoading(false)
+}
+}, [contextVans])
 
     const typeFilter = searchParams.get('type')
   
@@ -24,24 +23,6 @@ function Vans() {
     : vans
 
 
-    React.useEffect(() => {
-        async function loadVans() {
-            setLoading(true)
-            try {
-                const data = await getVans()
-                setVans(data)
-            } catch (err) {
-                console.log(err)
-            } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                  }, 1500);
-            }
-        }
-
-        loadVans()
-    }, [])
-
     let vansEl = filteredVans.map(van => (
             <div key={van.id} className='van-tile'>
                 <Link 
@@ -49,7 +30,10 @@ function Vans() {
                     state={{ search: searchParams.toString()}}
                     // state={{ search: `?${searchParams.toString()}` }}
                     >
+                    <div className='image-container'>
+
                     <img src={van.imageUrl} />
+                    </div>
                     <h1>{van.name}</h1>
                     <p>${van.price}<span>/day</span></p>
                     <div className={`van-type ${van.type} selected`}>{van.type}</div>
@@ -57,13 +41,13 @@ function Vans() {
             </div>
     ))
 
-    if (loading) {
-        return (
-            <>
-                <PacmanLoader className="loading"/>
-            </>
-        )
-    }
+    // if (loading) {
+    //     return (
+    //         <>
+    //             <PacmanLoader className="loading"/>
+    //         </>
+    //     )
+    // }
 
 
     return (
