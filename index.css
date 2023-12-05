@@ -376,8 +376,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 20px;
-    padding: 0 20px;
+    padding: 0 20px 2rem;
 }
 
 .host-vans-top {
@@ -590,5 +589,5 @@ input[type=password] {
     border: none;
     border-radius: 5px;
     width: 75%;
-    margin: auto auto 0;
+    margin: auto auto 2rem;
 }
