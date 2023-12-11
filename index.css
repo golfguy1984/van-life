@@ -606,7 +606,8 @@ input[type=password] {
 /* EDIT MODAL */
 
 .modal-wrapper {
-    height: 80vh;
+    min-height: 80vh;
+    max-height: 80vh;
     position: fixed;
     background-color: #fff;
     width: 80vw;
@@ -619,6 +620,7 @@ input[type=password] {
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    overflow-y: auto;
 }
 
 .modal-wrapper input, textarea {
@@ -631,6 +633,7 @@ input[type=password] {
 
 .modal-wrapper textarea {
     width: 100%;
+    resize: none;
 }
 
 .modal-wrapper label {
@@ -644,12 +647,15 @@ input[type=password] {
     position: absolute;
     right: 15;
     top: 15px;
+    cursor: pointer;
 }
 
 .trash-can {
     align-self: end;
     margin-right: 0.75rem;
     margin-top: 1rem;
+    overflow: visible;
+    cursor: pointer;
 }
 
 
@@ -697,6 +703,7 @@ input[type=password] {
     padding: 1rem 2rem;
     align-items: center;
     text-align: center;
+    justify-content: center;
 }
 
 .delete-modal-btn-wrapper {
@@ -770,8 +777,8 @@ border: none;
     position: absolute;
     display: inline-block;
     overflow: hidden;
-    left: 90;
-    top: 80;
+    right: -18;
+    bottom: -14;
   }
   
   .custom-button {
