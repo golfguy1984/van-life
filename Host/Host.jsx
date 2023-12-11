@@ -1,78 +1,102 @@
-import React, { useEffect, useState } from 'react'
-import { Outlet, NavLink } from 'react-router-dom'
-import { getHostIncome, getLoggedInVans } from '../api'
+import React, { useEffect, useState } from "react";
+import { Outlet, NavLink } from "react-router-dom";
+import { getHostIncome, getLoggedInVans } from "../api";
 
 function Host() {
+  const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [income, setIncome] = useState([]);
 
-  
-const [vans, setVans] = useState([])
-const [loading, setLoading] = useState(false)
-const [income, setIncome] = useState([])
+  const activeStyle = {
+    textDecoration: "underline",
+    color: "#161616",
+    fontWeight: "700",
+  };
 
-  
-const activeStyle =  {
-  textDecoration: "underline",
-  color:  "#161616",
-  fontWeight: "700"
-}
+  // useEffect(() => {
+  //   async function loadVans() {
+  //     setLoading(true)
+  //     try {
+  //       const data = await getLoggedInVans()
+  //       const income = await getHostIncome()
+  //       setVans(data)
+  //       setIncome(income)
+  //     } catch(err) {
+  //       console.log(err)
+  //     } finally {
+  //     setLoading(false)
+  //     }
+  //   }
 
+  //   loadVans()
 
+  // }, [])
 
-useEffect(() => {
-  async function loadVans() {
-    setLoading(true)
-    try {
-      const data = await getLoggedInVans()
-      const income = await getHostIncome()
-      setVans(data)
-      setIncome(income)
-    } catch(err) {
-      console.log(err)
-    } finally {
-    setLoading(false)  
+  useEffect(() => {
+    async function loadVans() {
+      setLoading(true);
+      try {
+        // Initial data fetch
+        await getLoggedInVans((updatedVans) => {
+          setVans(updatedVans);
+        });
+
+        // Other asynchronous operations
+        const incomeData = await getHostIncome();
+        setIncome(incomeData);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     }
+
+    loadVans();
+
+    // If you want to unsubscribe when the component unmounts
+    return () => {
+      if (getLoggedInVans.unsubscribe) {
+        getLoggedInVans.unsubscribe();
+      }
+    };
+  }, []);
+
+  if (loading) {
+    return <h1>loading...</h1>;
   }
-
-  loadVans()
-  
-}, [])
-
-
-if (loading) {
-  return <h1>loading...</h1>
-}
-
-
 
   return (
     <>
-        <nav className='host-page-nav'>
-            <NavLink 
-              to="."
-              end
-              style={({isActive}) => isActive ? activeStyle : null}
-            >
-                Dashboard
-            </NavLink>
-            <NavLink 
-              to="income"
-              style={({isActive}) => isActive ? activeStyle : null}
-            >Income
-            </NavLink>
-            <NavLink 
-              to="vans"
-              style={({isActive}) => isActive ? activeStyle : null}
-            >Vans
-            </NavLink>
-            <NavLink 
-              to="reviews"
-              style={({isActive}) => isActive ? activeStyle : null}
-            >Reviews
-            </NavLink>
-        </nav>
-        <Outlet context={{vans, income}}/>
+      <nav className="host-page-nav">
+        <NavLink
+          to="."
+          end
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          to="income"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          Income
+        </NavLink>
+        <NavLink
+          to="vans"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          Vans
+        </NavLink>
+        <NavLink
+          to="reviews"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          Reviews
+        </NavLink>
+      </nav>
+      <Outlet context={{ vans, income }} />
     </>
-  )
+  );
 }
 
-export default Host
+export default Host;
