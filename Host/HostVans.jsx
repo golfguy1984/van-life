@@ -1,39 +1,41 @@
-import React from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import { CiCirclePlus } from "react-icons/ci";
 
-
 function HostVans() {
+  const { vans } = useOutletContext();
 
-const {vans} = useOutletContext()
-
-
-let vansEl = vans.map(van => (
-  <Link key={van.id} to={van.id}>
-    <div className='host-vans-wrapper'>
-      <img src={van.imageUrl} />
-      <div>
-        <h1>{van.name}</h1>
-        <p>${van.price}/day</p>
+  let vansEl = vans.map((van) => (
+    <Link key={van.id} to={van.id}>
+      <div className="host-vans-wrapper">
+        <div className="host-vans-img-container">
+          <img src={van.imageUrl} />
+        </div>
+        <div>
+          <h1>{van.name}</h1>
+          <p>${van.price}/day</p>
+        </div>
       </div>
-    </div>
-  </Link>
-))
-
+    </Link>
+  ));
 
   return (
-    <div className='host-vans-main-container'>
-      <div className='host-vans-top'>
+    <div className="host-vans-main-container">
+      <div className="host-vans-top">
         <h1>Your listed vans</h1>
         <Link to="./add">
-          <p><span><CiCirclePlus /></span>Add van</p>
+          <p>
+            <span>
+              <CiCirclePlus />
+            </span>
+            Add van
+          </p>
         </Link>
       </div>
-      
-        {vansEl}
-   
+
+      {vansEl}
     </div>
-  )
+  );
 }
 
-export default HostVans
+export default HostVans;
