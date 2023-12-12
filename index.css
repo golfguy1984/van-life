@@ -623,7 +623,7 @@ input[type=password] {
     overflow-y: auto;
 }
 
-.modal-wrapper input, textarea {
+.modal-wrapper input, textarea, select {
     border: none;
     background-color: #FFF7ED;
     padding: 1rem;
@@ -634,6 +634,7 @@ input[type=password] {
 .modal-wrapper textarea {
     width: 100%;
     resize: none;
+    min-height: 167px !important;
 }
 
 .modal-wrapper label {
@@ -688,7 +689,7 @@ input[type=password] {
 }
 
 .delete-modal {
-    height: 55vh;
+    min-height: 55vh;
     position: fixed;
     background-color: #fff;
     width: 90vw;
@@ -799,5 +800,23 @@ border: none;
   .custom-button:hover {
     background-color: #2980b9; /* Change the hover background color */
   }
+
+  .price-cat-label-wrapper {
+    display: flex;
+  }
+
+  .price-cat-wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .price, .cat-select, .price-label {
+    width: 50%;
+  }
+
+  /* .cat-select {
+    background-color: #FFF7ED;
+
+  } */
 
 

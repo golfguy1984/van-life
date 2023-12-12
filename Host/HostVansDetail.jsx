@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useParams, NavLink, useOutletContext } from "react-router-dom";
+import {
+  Outlet,
+  useParams,
+  NavLink,
+  useOutletContext,
+  useNavigate,
+} from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
 import EditModal from "../EditModal";
 import DeleteModal from "../DeleteModal";
@@ -14,6 +20,7 @@ function HostVansDetail() {
 
   const { id } = useParams();
   const { vans } = useOutletContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let filteredVan = vans.filter((van) => van.id === id);
@@ -49,7 +56,9 @@ function HostVansDetail() {
           vanId={id}
         />
       )}
-      {deleteOpen && <DeleteModal closeModal={handleDelete} />}
+      {deleteOpen && (
+        <DeleteModal closeModal={handleDelete} navigate={navigate} vanId={id} />
+      )}
       <div className="host-van-detail-container">
         {currentVan && (
           <>
