@@ -13,6 +13,7 @@ function Test({ currentVan, handleClick, openModal, vanId }) {
     price: currentVan?.price || "",
     description: currentVan?.description || "",
     imageUrl: currentVan?.imageUrl || "",
+    type: currentVan?.type || "",
   });
 
   const textareaRef = useRef(null);
@@ -82,15 +83,35 @@ function Test({ currentVan, handleClick, openModal, vanId }) {
           value={value.name}
           onChange={handleChange}
         />
+        <div className="price-cat-label-wrapper">
+          <label htmlFor="price" className="price-label">
+            PRICE:
+          </label>
+          <label htmlFor="cat-select">CATAGORY:</label>
+        </div>
+        <div className="price-cat-wrapper">
+          <input
+            id="price"
+            className="price"
+            name="price"
+            type="text"
+            value={value.price}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="price">PRICE:</label>
-        <input
-          id="price"
-          name="price"
-          type="text"
-          value={value.price}
-          onChange={handleChange}
-        />
+          <select
+            id="cat-select"
+            className="cat-select"
+            name="type"
+            value={value.type}
+            onChange={handleChange}
+          >
+            <option>--select--</option>
+            <option value="rugged">Rugged</option>
+            <option value={"simple"}>Simple</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
 
         <label htmlFor="description">DESCRIPTION:</label>
         <textarea

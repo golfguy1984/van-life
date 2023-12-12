@@ -9,6 +9,7 @@ import {
   setDoc,
   addDoc,
   onSnapshot,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
@@ -247,6 +248,12 @@ export async function logOut() {
   await signOut(auth);
   localStorage.clear();
   console.log("logged out");
+}
+
+export async function deleteVan(id) {
+  await getUserId();
+  const userVanRef = doc(db, "user", uid, "vans", id);
+  await deleteDoc(userVanRef);
 }
 
 export async function uploadImageAndStoreUrl(file) {
