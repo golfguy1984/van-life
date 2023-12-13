@@ -860,10 +860,12 @@ border: none;
   .review-date {
     color: #8C8C8C;
     font-weight: 500;
+    margin-left: .3rem;
   }
 
   .review-wrapper {
     border-bottom: 1px solid #C7C7C7;
+    margin-bottom: 1rem;
   }
 
 

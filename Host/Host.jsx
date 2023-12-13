@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { getHostIncome, getLoggedInVans } from "../api";
+import { getHostIncome, getHostReviews, getLoggedInVans } from "../api";
 
 function Host() {
   const [vans, setVans] = useState([]);
   const [loading, setLoading] = useState(false);
   const [income, setIncome] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   const activeStyle = {
     textDecoration: "underline",
@@ -13,37 +14,18 @@ function Host() {
     fontWeight: "700",
   };
 
-  // useEffect(() => {
-  //   async function loadVans() {
-  //     setLoading(true)
-  //     try {
-  //       const data = await getLoggedInVans()
-  //       const income = await getHostIncome()
-  //       setVans(data)
-  //       setIncome(income)
-  //     } catch(err) {
-  //       console.log(err)
-  //     } finally {
-  //     setLoading(false)
-  //     }
-  //   }
-
-  //   loadVans()
-
-  // }, [])
-
   useEffect(() => {
     async function loadVans() {
       setLoading(true);
       try {
-        // Initial data fetch
         await getLoggedInVans((updatedVans) => {
           setVans(updatedVans);
         });
-
-        // Other asynchronous operations
         const incomeData = await getHostIncome();
         setIncome(incomeData);
+
+        const reviewsData = await getHostReviews();
+        setReviews(reviewsData);
       } catch (err) {
         console.error(err);
       } finally {
@@ -94,7 +76,7 @@ function Host() {
           Reviews
         </NavLink>
       </nav>
-      <Outlet context={{ vans, income }} />
+      <Outlet context={{ vans, income, reviews }} />
     </>
   );
 }

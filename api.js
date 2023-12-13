@@ -54,16 +54,6 @@ const getUserId = () => {
   });
 };
 
-// const unsub = onSnapshot(
-//   doc(db, "user", "NAMuKux4EhbNbDetaaMv5xRheFU2"),
-//   (doc) => {
-//     console.log("current data: ", doc.data());
-//   },
-//   (error) => {
-//     console.error("Error fetching document: ", error);
-//   }
-// );
-
 export async function updateVan(id, updatedValues) {
   await getUserId();
   const userVanRef = doc(db, "user", uid, "vans", id);
@@ -170,6 +160,16 @@ export async function getHostIncome() {
     id: doc.id,
   }));
   return income;
+}
+
+export async function getHostReviews() {
+  await getUserId();
+  const snapshot = await getDocs(collection(db, "user", uid, "Reviews"));
+  const reviews = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+  return reviews;
 }
 
 export async function getVan(id) {
