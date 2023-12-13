@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { CiCirclePlus } from "react-icons/ci";
+import AddModal from "../AddModal";
 
 function HostVans() {
+  const [isOpen, setIsOpen] = useState(false);
   const { vans } = useOutletContext();
+
+  const handleClick = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   let vansEl = vans.map((van) => (
     <Link key={van.id} to={van.id}>
@@ -20,21 +26,24 @@ function HostVans() {
   ));
 
   return (
-    <div className="host-vans-main-container">
-      <div className="host-vans-top">
-        <h1>Your listed vans</h1>
-        <Link to="./add">
-          <p>
-            <span>
-              <CiCirclePlus />
-            </span>
-            Add van
-          </p>
-        </Link>
-      </div>
+    <>
+      {isOpen && <AddModal handleClick={handleClick} />}
+      <div className="host-vans-main-container">
+        <div className="host-vans-top">
+          <h1>Your listed vans</h1>
+          <div onClick={handleClick}>
+            <p>
+              <span>
+                <CiCirclePlus />
+              </span>
+              Add van
+            </p>
+          </div>
+        </div>
 
-      {vansEl}
-    </div>
+        {vansEl}
+      </div>
+    </>
   );
 }
 

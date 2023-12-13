@@ -166,12 +166,14 @@ export async function getVan(id) {
 
 export async function addVan(data) {
   try {
+    await getUserId();
     const collectionPath = `user/${uid}/vans`;
     const ref = await addDoc(collection(db, collectionPath), {
       ...data,
       id: uid,
     });
-    const refTwo = await addDoc(collection(db, "vans"), { ...data, id: uid });
+    // console.log(ref);
+    // const refTwo = await addDoc(collection(db, "vans"), { ...data, id: uid });
   } catch (err) {
     console.log(err);
   }
