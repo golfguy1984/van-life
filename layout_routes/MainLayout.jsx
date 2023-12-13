@@ -17,8 +17,11 @@ function MainLayout() {
   useEffect(() => {
     async function loadvans() {
       try {
-        const data = await getAllVans();
-        setAllVans(data);
+        // const data = await getAllVans();
+        // setAllVans(data);
+        await getAllVans((updatedVans) => {
+          setAllVans(updatedVans);
+        });
       } catch (err) {
         console.log(err);
       }
