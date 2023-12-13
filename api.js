@@ -64,46 +64,63 @@ const getUserId = () => {
 //   }
 // );
 
-// THIS IS THE ONE I'M WORKING ON//
-// needs to take in the data dynamically - object with updated changes
 export async function updateVan(id, updatedValues) {
   await getUserId();
   const userVanRef = doc(db, "user", uid, "vans", id);
   setDoc(userVanRef, updatedValues, { merge: true });
 }
-// THIS ONE ABOVE ^ //
 
-export async function getAllVans() {
-  try {
-    const usersSnapshot = await getDocs(collection(db, "user"));
+// THIS IS THE ONE I'M WORKING ON//
+// needs to take in the data dynamically - object with updated changes
 
-    let allVans = [];
+export async function getAllVans(callback) {
+  const usersCollectionRef = collection(db, "user");
 
-    // Use Promise.all to wait for all vansSnapshots to resolve
-    await Promise.all(
-      usersSnapshot.docs.map(async (userDoc) => {
-        const userId = userDoc.id;
+  const unsubscribe = onSnapshot(usersCollectionRef, async (usersSnapshot) => {
+    try {
+      let allVans = [];
 
-        const vansSnapshot = await getDocs(
-          collection(db, "user", userId, "vans")
-        );
+      // Use Promise.all to wait for all vansSnapshots to resolve
+      await Promise.all(
+        usersSnapshot.docs.map(async (userDoc) => {
+          const userId = userDoc.id;
 
-        const userVans = vansSnapshot.docs.map((vanDoc) => ({
-          ...vanDoc.data(),
-          id: vanDoc.id,
-          userId: userId,
-        }));
+          const vansCollectionRef = collection(db, "user", userId, "vans");
 
-        allVans = allVans.concat(userVans);
-      })
-    );
+          // Use a nested onSnapshot to listen for updates on the vans subcollection
+          const vansUnsubscribe = onSnapshot(
+            vansCollectionRef,
+            (vansSnapshot) => {
+              const userVans = vansSnapshot.docs.map((vanDoc) => ({
+                ...vanDoc.data(),
+                id: vanDoc.id,
+                userId: userId,
+              }));
 
-    return allVans;
-  } catch (error) {
-    console.error("Error getting all vans:", error);
-    throw error;
-  }
+              allVans = userVans;
+              callback(allVans);
+            }
+          );
+
+          // Store the vansUnsubscribe function in case you need to stop listening
+          // for updates on this specific user's vans
+          // (you might want to manage this in your component's state)
+          // userVansUnsubscribes.push(vansUnsubscribe);
+        })
+      );
+
+      // Optionally, you can callback here as well if you want to get the initial data
+      // callback(allVans);
+    } catch (error) {
+      console.error("Error fetching vans:", error);
+    }
+  });
+
+  // Return the unsubscribe function to stop listening when needed
+  return unsubscribe;
 }
+
+// THIS ONE ABOVE ^ //
 
 export async function getVans() {
   const snapshot = await getDocs(vansCollectionRef);
