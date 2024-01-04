@@ -70,7 +70,7 @@ function VansDetail() {
         async (position) => {
           try {
             const response = await axios.post(
-              "http://localhost:8000/get-state",
+              "https://localhost:8000/get-state",
               {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
@@ -95,7 +95,7 @@ function VansDetail() {
   const handleRentClick = async () => {
     setIsLoading(true);
 
-    const response = await fetch("http://localhost:8000/api/checkout");
+    const response = await fetch("https://localhost:8000/api/checkout");
 
     if (!response.ok) {
       throw new Error(`failed to fetch ${response.status}`);

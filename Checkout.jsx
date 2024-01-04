@@ -55,7 +55,7 @@ export default function PaymentModal() {
     const checkAndRedirect = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/checkToken?token=${token}`
+          `https://localhost:8000/api/checkToken?token=${token}`
         );
 
         if (!response.ok) {
@@ -93,7 +93,7 @@ export default function PaymentModal() {
 
     const fetchClientSecret = async () => {
       try {
-        const response = await fetch("http://localhost:8000/pay", {
+        const response = await fetch("https://localhost:8000/pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -210,9 +210,9 @@ export default function PaymentModal() {
           </p>
         </div>
         <div className="item">Trip Fee</div>
-        <div className="price">$3.75/day</div>
+        <div className="price-checkout">$3.75/day</div>
         <div className="item">Total per day</div>
-        <div className="price">
+        <div className="price-checkout">
           ${Number(van?.price * discount + 3.75).toFixed(2)}/day
         </div>
       </div>
@@ -220,18 +220,18 @@ export default function PaymentModal() {
         <div className="item">
           <p>{duration}-day trip</p>
         </div>
-        <div className="price">
+        <div className="price-checkout">
           <p>
             US$ {Number((van?.price * discount + 3.75) * duration).toFixed(2)}
             /day
           </p>
         </div>
         <div className="item">Delivery Fee</div>
-        <div className="price">Free</div>
+        <div className="price-checkout">Free</div>
         <div className="item">1000 total miles</div>
-        <div className="price">Free</div>
+        <div className="price-checkout">Free</div>
         <div className="item">Trip total</div>
-        <div className="price">
+        <div className="price-checkout">
           US${" "}
           {Number((van?.price * discount + 3.75) * duration * 1.07).toFixed(2)}
         </div>

@@ -5,6 +5,13 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import crypto from "crypto";
 import dotenv from "dotenv";
+import fs from "fs";
+import https from "https";
+
+const options = {
+  key: fs.readFileSync("localhost-key.pem"),
+  cert: fs.readFileSync("localhost.pem"),
+};
 
 const stripe = new Stripe(
   "sk_test_51ON3wUKknoF4bIMWo1KFz4xIlHh7JpZpwLmKDRloBINgdAfiBlc42Uo74jaXolRjRIMS7rR2vF9errdLEp7PJspE00JchxGGhX"
@@ -38,6 +45,10 @@ const calculateTotal = (price, numDays) => {
 
   return roundedResult;
 };
+
+app.get("/", (req, res) => {
+  res.send("Hello, this is the root path!");
+});
 
 app.post("/pay", async (req, res) => {
   try {
@@ -117,6 +128,6 @@ app.post("/api/markTokenUsed", (req, res) => {
 
 const PORT = 8000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`Server is running on https://localhost:${PORT}`);
 });
