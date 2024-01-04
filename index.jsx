@@ -19,6 +19,10 @@ import HostVansAdd from "./Host/HostVansAdd";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthRequired from "./layout_routes/AuthRequired";
+import CheckoutForm from "./CheckoutForm";
+import PaymentModal from "./PaymentModal";
+import Checkout from "./Checkout";
+import Confirmation from "./pages/Confirmation";
 
 // import "./server"
 
@@ -31,6 +35,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/vans" element={<Vans />} />
           <Route path="vans/:id" element={<VansDetail />} />
+          <Route path="/vans/:id/checkout" element={<Checkout />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
 
@@ -48,6 +53,7 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="/confirmation/:token" element={<Confirmation />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -6,7 +6,11 @@ function AuthRequired() {
 
   if (!context.user) {
     return (
-      <Navigate to="/" state={{ message: "You must log in first" }} replace />
+      <Navigate
+        to="/Login"
+        state={{ message: "You must log in first" }}
+        replace
+      />
     );
   }
 

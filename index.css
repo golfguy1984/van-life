@@ -106,7 +106,8 @@ header a:hover,
     line-height: 24px;
 }
 
-.home-container a {
+.home-container a,
+.confirm-main-container a {
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -120,6 +121,10 @@ header a:hover,
     border-radius: 5px;
     cursor: pointer;
     transition: transform .1s ease-in-out;
+}
+
+.confirm-main-container a {
+    width: 75%;
 }
 
 .home-container a:hover {
@@ -731,7 +736,7 @@ border: none;
 }
 
 .loading-overlay {
-    position: absolute;
+    position: fixed; /* this was absolute it may have broken other parts */
     top: 0;
     left: 0;
     width: 100%;
@@ -868,5 +873,282 @@ border: none;
     margin-bottom: 1rem;
   }
 
+  .date-picker-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 1rem;
+    /* gap: 1rem; */
+  }
 
+  .date-picker-wrapper input {
+    margin-bottom: 1rem;
+    background: transparent;
+    border: 1px solid #B9B9B9;
+    
+  }
+
+
+
+  .rent-button-wrapper {
+    position: fixed;
+    background: #fff7ed;
+    width: 90%;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 4px 3px 20px 0px rgba(0, 0, 0, 0.2); 
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .rent-button-wrapper .total-price p {
+    margin: 0;
+ }
+
+
+
+ .rent-button-wrapper .total-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ }
+
+ .discount {
+    background: #EBEBEB;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin: 0 0 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+ }
+
+ .discount p {
+    margin: 0;
+    color: #8C8C8C;
+ }
+
+ .date-picker-main {
+    width: 70%
+ }
+ .date-picker-main input {
+    width: 100%;
+    padding: .5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+ }
+
+ .time-picker-main {
+    width: 30%
+ }
+ .time-picker-main input {
+    width: 100%;
+    padding: .5rem;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+ }
+
+ .date-time-wrapper {
+    display: flex;
+    width: 100%;
+    
+    /* justify-content: space-between; */
+}
+
+.date-picker-wrapper h4 {
+    margin: 0;
+    margin-bottom: .25rem;
+}
+
+.start-time, .end-time {
+    width: 50%;
+}
+
+.react-datepicker__input-container {
+    justify-content: flex-end;
+    display: flex !important;
+}
+
+.checkout-wrapper {
+    padding: 1rem;
+}
+
+
+.checkout-image-container {
+    position: relative;
+  width: 25%;
+  padding-bottom: 25%; /* Set padding to create a 1:1 aspect ratio */
+  overflow: hidden;
+}
+
+.checkout-dates-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.checkout-wrapper img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.checkout-location-container {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.checkout-location-container h4,
+.checkout-location-container h5,
+.checkout-location-container p {
+    margin: 0
+}
+
+.checkout-location-container p {
+    font-size: .75rem;
+    color: #838383;
+}
+
+.grid-container, .total-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+  gap: 10px; /* Adjust the gap between items */
+  max-width: 600px; /* Adjust the maximum width of the grid container */
+  margin: 20px auto; /* Center the grid container */
+  padding: 1rem;
+}
+
+.grid-container {
+    margin-top: 0;
+}
+
+.total-grid-container {
+    background-color: #ffedd7;
+    
+    border-radius: 1rem;
+}
+
+.price-checkout {
+  margin-left: auto;
+  text-align: end;
+  width: auto
+  }
+
+.grid-container p, .total-grid-container p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.checkout-review-container {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.checkout-review-container h3 {
+    margin-top: 1rem;
+    margin-bottom: .25rem;
+    
+}
+
+.cancellation-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #C7C7C7;
+    padding-bottom: 1rem;
+}
+
+.cancellation-container p {
+    margin: 0;
+
+}
+
+.payment-info-container {
+    border-bottom: 1px solid #C7C7C7;
+}
+
+.payment-info-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.checkout-form {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+.checkout-form button {
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    background-color: #FF8C38;
+    border-radius: 0.75rem;
+    color: white;
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+
+.arrow-container {
+    display: flex;
+    align-items: center;
+ 
+}
+
+.arrow-container p {
+    color: #FF8C38;
+    font-weight: bold;
+    margin: 0;
+}
+
+.pay-spinner-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pickup-return-wrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1rem;
+}
+
+.pickup-return-wrapper h4, .pickup-return-wrapper p {
+    margin: 0;
+}
+
+.pickup-return-inner {
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+    /* justify-content: space-between; */
+}
+
+.confirm-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
 
