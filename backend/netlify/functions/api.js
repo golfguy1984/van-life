@@ -12,6 +12,6 @@ router.post("/get-state", (req, res) => {
   res.json({ message: "Received POST request to get-state" });
 });
 
-api.use("/api/", router);
+api.use("/.netlify/functions/api", router);
 
 export const handler = serverless(api);
