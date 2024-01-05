@@ -36,6 +36,6 @@ router.post("/get-state", async (req, res) => {
   }
 });
 
-app.use("/get-state/", router);
+app.use("/.netlify/functions/get-state", router);
 
 export const handler = serverless(app);
