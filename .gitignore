@@ -3,3 +3,5 @@ dist/
 *.env
 .DS_Store
 notes.md
+# Local Netlify folder
+.netlify
