@@ -69,10 +69,13 @@ function VansDetail() {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
-            const response = await axios.post("/.netlify/functions/get-state", {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            });
+            const response = await axios.post(
+              "/.netlify/functions/get-state/get-state",
+              {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              }
+            );
             setUserState(response.data.state);
           } catch (error) {
             console.error("Error getting state:", error.message);

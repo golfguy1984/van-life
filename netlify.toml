@@ -14,12 +14,11 @@
   status = 200
   to = "/.netlify/functions/test/:splat"
 
-  [[redirects]]
+[[redirects]]
   force = true
   from = "/get-state/*"
   status = 200
   to = "/.netlify/functions/get-state/:splat"
 
-
-  [build]
+[build]
   functions = "backend/netlify/functions"
