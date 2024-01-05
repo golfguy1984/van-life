@@ -76,7 +76,7 @@ app.post("/pay", async (req, res) => {
   }
 });
 
-app.post("/get-state", async (req, res) => {
+app.post("/api/get-state", async (req, res) => {
   try {
     const { latitude, longitude } = req.body;
     const response = await axios.get(
