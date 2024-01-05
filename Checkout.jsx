@@ -54,9 +54,7 @@ export default function PaymentModal() {
   useEffect(() => {
     const checkAndRedirect = async () => {
       try {
-        const response = await fetch(
-          `https://localhost:8000/api/checkToken?token=${token}`
-        );
+        const response = await fetch(`api/api/checkToken?token=${token}`);
 
         if (!response.ok) {
           throw new Error(`Failed to check token validity: ${response.status}`);
@@ -93,7 +91,7 @@ export default function PaymentModal() {
 
     const fetchClientSecret = async () => {
       try {
-        const response = await fetch("https://localhost:8000/pay", {
+        const response = await fetch("api/pay", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

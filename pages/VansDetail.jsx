@@ -69,13 +69,10 @@ function VansDetail() {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
-            const response = await axios.post(
-              "https://localhost:8000/get-state",
-              {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-              }
-            );
+            const response = await axios.post("api/get-state", {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
             setUserState(response.data.state);
           } catch (error) {
             console.error("Error getting state:", error.message);
@@ -95,7 +92,7 @@ function VansDetail() {
   const handleRentClick = async () => {
     setIsLoading(true);
 
-    const response = await fetch("https://localhost:8000/api/checkout");
+    const response = await fetch("api/api/checkout");
 
     if (!response.ok) {
       throw new Error(`failed to fetch ${response.status}`);
