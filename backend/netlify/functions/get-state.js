@@ -11,7 +11,6 @@ const router = Router();
 
 router.post("/get-state", async (req, res) => {
   try {
-    console.log(process.env.GOOGLE_MAPS_API_KEY);
     const { latitude, longitude } = req.body;
 
     const response = await axios.get(
