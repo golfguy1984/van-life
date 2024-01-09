@@ -20,7 +20,8 @@
     "react-router-dom": "6.4.3",
     "react-spinners": "^0.13.8",
     "recharts": "^2.9.3",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "stripe": "^14.8.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "*",
