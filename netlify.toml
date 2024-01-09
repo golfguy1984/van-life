@@ -20,5 +20,23 @@
   status = 200
   to = "/.netlify/functions/get-state/:splat"
 
+[[redirects]]
+  force = true
+  from = "/checkout/*"
+  status = 200
+  to = "/.netlify/functions/checkout/:splat"
+
+[[redirects]]
+  force = true
+  from = "/checkout-visited/*"
+  status = 200
+  to = "/.netlify/functions/checkout-visited/:splat"
+
+[[redirects]]
+  force = true
+  from = "/pay/*"
+  status = 200
+  to = "/.netlify/functions/pay/:splat"
+
 [build]
   functions = "backend/netlify/functions"

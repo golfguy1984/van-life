@@ -46,8 +46,6 @@ function VansDetail() {
   const durationInMs = endDate - startDate;
   const durationInDays = Math.ceil(durationInMs / (1000 * 60 * 60 * 24));
 
-  console.log(durationInDays);
-
   useEffect(() => {
     if (durationInDays >= 3) {
       setDiscount(true);
@@ -70,7 +68,7 @@ function VansDetail() {
         async (position) => {
           try {
             const response = await axios.post(
-              "/.netlify/functions/get-state/get-state",
+              "http://localhost:8888/.netlify/functions/get-state/get-state",
               {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
@@ -92,23 +90,48 @@ function VansDetail() {
 
   const search = location.state?.search || "";
 
+  // const setCookie = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8888/.netlify/functions/checkout-visited",
+  //       {
+  //         method: "POST", // Specify the HTTP method,
+  //         credentials: "include",
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("failed to set cookie");
+  //     }
+
+  //     // If you need the JSON data, you can use it here
+  //     const data = await response.json();
+  //     console.log("Response JSON:", data);
+  //   } catch (error) {
+  //     console.error("error", error);
+  //   }
+  // };
+
   const handleRentClick = async () => {
     setIsLoading(true);
+    //set cookie here
 
-    const response = await fetch("api/api/checkout");
+    // const response = await fetch(
+    //   "http://localhost:8888/.netlify/functions/checkout"
+    // );
 
-    if (!response.ok) {
-      throw new Error(`failed to fetch ${response.status}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`failed to fetch ${response.status}`);
+    // }
 
-    const data = await response.json();
-    const { token } = data;
+    // const data = await response.json();
+    // const { token } = data;
 
-    localStorage.setItem("token", token);
+    // localStorage.setItem("token", token);
 
     setTimeout(() => {
       navigate(
-        `/vans/${id}/checkout?duration=${durationInDays}&start=${startDate}&end=${endDate}&token=${token}`
+        `/vans/${id}/checkout?duration=${durationInDays}&start=${startDate}&end=${endDate}`
       );
     }, 2500);
   };

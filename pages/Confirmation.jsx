@@ -30,6 +30,12 @@ const Confirmation = () => {
   localStorage.removeItem("token");
 
   useEffect(() => {
+    window.history.replaceState({ checkoutVisited: false }, document.title);
+  }, []);
+
+  console.log(window.history.state);
+
+  useEffect(() => {
     const rentedVan = allVans?.filter((van) => van.id === vanID);
 
     setVan(rentedVan);
@@ -63,6 +69,65 @@ const Confirmation = () => {
 
     markTokenAsUsed();
   }, [token]);
+
+  useEffect(() => {
+    const clearCookie = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8888/.netlify/functions/checkout-visited",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ clearCookie: true }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to clear cookie: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data.message); // Log success message
+      } catch (error) {
+        console.error("Error clearing cookie:", error);
+        // Handle the error as needed
+      }
+    };
+
+    clearCookie();
+  }, []);
+
+  useEffect(() => {
+    const checkCookie = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8888/.netlify/functions/checkout-visited",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ checkCookie: true }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to check cookie: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Cookie status:", data.cookieExists);
+      } catch (error) {
+        console.error("Error checking cookie:", error);
+      }
+    };
+
+    checkCookie();
+  }, []);
 
   useEffect(() => {
     const fetchPaymentIntent = async () => {

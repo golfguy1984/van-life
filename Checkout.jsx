@@ -76,6 +76,38 @@ export default function PaymentModal() {
     checkAndRedirect();
   }, [token, navigate]);
 
+  // useEffect(() => {
+  //   const setCookie = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "http://localhost:8888/.netlify/functions/checkout-visited",
+  //         {
+  //           method: "POST", // Specify the HTTP method,
+  //           credentials: "include",
+  //         }
+  //       );
+
+  //       if (!response.ok) {
+  //         throw new Error("failed to set cookie");
+  //       }
+
+  //       // If you need the JSON data, you can use it here
+  //       const data = await response.json();
+  //       console.log("Response JSON:", data);
+  //     } catch (error) {
+  //       console.error("error", error);
+  //     }
+  //   };
+
+  //   setCookie();
+  // }, []);
+
+  useEffect(() => {
+    window.history.replaceState({ checkoutVisited: true }, document.title);
+  }, []);
+
+  console.log(window.history.state);
+
   useEffect(() => {
     if (allVans) {
       const contextVan = allVans.filter((item) => item.id === id)[0];
@@ -91,15 +123,18 @@ export default function PaymentModal() {
 
     const fetchClientSecret = async () => {
       try {
-        const response = await fetch("api/pay", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            price: van?.price,
-            numDays: duration,
-            van: van,
-          }),
-        });
+        const response = await fetch(
+          "http://localhost:8888/.netlify/functions/pay",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              price: van?.price,
+              numDays: duration,
+              van: van,
+            }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
