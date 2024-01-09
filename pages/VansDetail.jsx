@@ -68,7 +68,7 @@ function VansDetail() {
         async (position) => {
           try {
             const response = await axios.post(
-              "http://localhost:8888/.netlify/functions/get-state/get-state",
+              "/.netlify/functions/get-state/get-state",
               {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,

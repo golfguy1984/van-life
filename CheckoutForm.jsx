@@ -36,7 +36,7 @@ const CheckoutForm = forwardRef(({ token, vanID }, ref) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: `https://localhost:5173/confirmation/${token}?vanID=${vanID}`,
+        return_url: `https://deft-kitten-82350e.netlify.app/confirmation/${token}?vanID=${vanID}`,
       },
     });
 
